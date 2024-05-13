@@ -37,6 +37,8 @@ jobs:
                 
             - name: Create tag
               run: |
+                git config --global user.email "gabriel.cosmai@outlook.com"
+                git config --global user.name "Gabriel Cosmai"
                 git tag v1.0.0
                 git push origin v1.0.0
               env:
