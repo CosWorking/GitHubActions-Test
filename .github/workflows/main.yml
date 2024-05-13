@@ -63,3 +63,15 @@ jobs:
                 to: gabriel.cosmai@outlook.com
                 from: cosmaigabriel26@gmail.com
                 body: The CI/CD pipeline failed. Please check the GitHub Actions log for more details.
+
+    deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      environment: 
+        name: production
+        url: ${{ steps.deploy.outputs.url }}
+      steps:
+        - name: Deploy to production
+          id: deploy
+          run: echo "Simulate deployment"
+              
