@@ -73,5 +73,6 @@ jobs:
       steps:
         - name: Deploy to production
           id: deploy
-          run: npm run start
-              
+          run: |
+            cd app
+            npm run start
