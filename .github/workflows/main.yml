@@ -51,4 +51,5 @@ jobs:
                 password: ${{secrets.MAIL_PASSWORD}}
                 subject: CI/CD Pipeline failed
                 to: gabriel.cosmai@outlook.com
+                from: cosmaigabriel26@gmail.com
                 body: The CI/CD pipeline failed. Please check the GitHub Actions log for more details.
