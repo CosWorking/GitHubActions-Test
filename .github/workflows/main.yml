@@ -40,13 +40,13 @@ jobs:
                 git tag v1.0.0
                 git push origin v1.0.0
               env:
-                GH_TOKEN: ${{ secrets.TOKEN }}
+                GH_TOKEN: ${{ secrets.GH_PAT }}
 
             - name: Create release
               run: |
                 gh release create ${{ github.ref }} ./dist/my-app.zip -t "Release ${{ github.ref }}" -n "Release notes"
               env: 
-                GH_TOKEN: ${{ secrets.TOKEN }}
+                GH_TOKEN: ${{ secrets.GH_PAT }}
 
             - name: Send failure notification
               if: failure()
