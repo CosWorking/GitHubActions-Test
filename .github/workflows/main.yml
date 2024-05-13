@@ -20,3 +20,34 @@ jobs:
 
             - name: Install dependences
               run: npm install
+
+            - name: Run test
+              run: npm test
+
+            - name: Run build
+              run: npm run build
+
+            - name: Install GitHub CLI
+              run: |
+                sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+                sudo apt-add-repository https://cli.github.com/packages
+                sudo apt update
+                sudo apt install gh
+
+            - name: Create release
+              run: |
+                gh release create ${{ github.ref }} ./dist/my-app.zip -t "Release ${{ github.ref }}" -n "Release notes"
+              env: 
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Send failure notification
+              if: failure()
+              uses: dawidd6/action-send-mail@v2
+              with:
+                server_address: smtp.gmail.com
+                server_port: 465
+                username: ${{secrets.MAIL_USERNAME}}
+                password: ${{secrets.MAIL_PASSWORD}}
+                subject: CI/CD Pipeline failed
+                to: gabriel.cosmai@outlook.com
+                body: The CI/CD pipeline failed. Please check the GitHub Actions log for more details.
