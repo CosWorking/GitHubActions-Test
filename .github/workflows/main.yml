@@ -74,5 +74,6 @@ jobs:
         - name: Deploy to production
           id: deploy
           run: |
-            cd app
+            pwd
+            cd src
             npm run start
