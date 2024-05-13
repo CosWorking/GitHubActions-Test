@@ -39,7 +39,7 @@ jobs:
               run: |
                 gh release create ${{ github.ref }} ./dist/my-app.zip -t "Release ${{ github.ref }}" -n "Release notes"
               env: 
-                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GH_TOKEN: ${{ secrets.TOKEN }}
 
             - name: Send failure notification
               if: failure()
