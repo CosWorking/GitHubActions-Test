@@ -1,3 +1,4 @@
+// app.ts
 import express from 'express';
 
 const app = express();
@@ -12,8 +13,8 @@ app.get('/test', (req, res) => {
   }
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
 
-export default app;
+export { app, server };

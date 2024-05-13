@@ -1,5 +1,10 @@
+// app.test.ts
 import request from 'supertest';
-import app from './app';
+import { app, server } from './app';
+
+afterAll(done => {
+  server.close(done);
+});
 
 describe('GET /test', () => {
   it('should return 200 when variable is GitHubActions', async () => {
