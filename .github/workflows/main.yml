@@ -34,7 +34,14 @@ jobs:
                 tar xvf ghcli.tar.gz
                 sudo mv gh_2.0.0_linux_amd64/bin/gh /usr/local/bin/
                 rm -rf gh_2.0.0_linux_amd64 ghcli.tar.gz
-            
+                
+            - name: Create tag
+              run: |
+                git tag v1.0.0
+                git push origin v1.0.0
+              env:
+                GH_TOKEN: ${{ secrets.TOKEN }}
+
             - name: Create release
               run: |
                 gh release create ${{ github.ref }} ./dist/my-app.zip -t "Release ${{ github.ref }}" -n "Release notes"
