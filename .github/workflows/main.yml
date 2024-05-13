@@ -75,5 +75,5 @@ jobs:
           id: deploy
           run: |
             pwd
-            cd app
+            cd dist
             npm run start
