@@ -40,9 +40,11 @@ jobs:
                 git config --global user.email "gabriel.cosmai@outlook.com"
                 git config --global user.name "Gabriel Cosmai"
                 git tag v1.0.0
+                git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/CosWorking/GitHubActions-Test.git
                 git push origin v1.0.0
               env:
                 GH_TOKEN: ${{ secrets.GH_PAT }}
+              
 
             - name: Create release
               run: |
