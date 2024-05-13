@@ -35,20 +35,21 @@ jobs:
                 sudo mv gh_2.0.0_linux_amd64/bin/gh /usr/local/bin/
                 rm -rf gh_2.0.0_linux_amd64 ghcli.tar.gz
                 
-            - name: Create tag
-              run: |
-                git config --global user.email "gabriel.cosmai@outlook.com"
-                git config --global user.name "Gabriel Cosmai"
-                git tag v1.0.0
-                git push origin v1.0.0
-              env:
-                GH_TOKEN: ${{ secrets.GH_PAT }}
-
             - name: Create release
               run: |
-                gh release create ${{ github.ref }} ./dist/my-app.zip -t "Release ${{ github.ref }}" -n "Release notes"
-              env: 
+                curl -X POST \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  -H "Authorization: token ${{ secrets.GH_PAT }}" \
+                  https://api.github.com/repos/CosWorking/GitHubActions-Test/releases \
+                  -d '{
+                    "name": "Release",
+                    "body": "Release notes",
+                    "draft": false,
+                    "prerelease": false
+                  }'
+              env:
                 GH_TOKEN: ${{ secrets.GH_PAT }}
+              
 
             - name: Send failure notification
               if: failure()
