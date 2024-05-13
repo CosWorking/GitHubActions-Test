@@ -73,4 +73,6 @@ jobs:
       steps:
         - name: Deploy to production
           id: deploy
-          run: npm run start
+          run: |
+            cd /home/runner/work/GitHubActions-Test/GitHubActions-Test/
+            npm run start
